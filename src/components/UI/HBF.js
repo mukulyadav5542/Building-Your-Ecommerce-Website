@@ -1,8 +1,10 @@
 import React from 'react';
 import { Navbar, Container, Button, Row, Col } from "react-bootstrap";
+// import Card from 'react-bootstrap/Card';
 import ProductsArr from "./ProductsArr";
+// import Cart from '../Cart/Cart';
 
-const HBF = () => {
+const HBF = (props) => {
   return (
     <>
       <Navbar bg="dark" expand="sm" variant="dark">
@@ -10,7 +12,7 @@ const HBF = () => {
           <Navbar.Brand href="/">HOME</Navbar.Brand>
           <Navbar.Brand href="/">STORE</Navbar.Brand>
           <Navbar.Brand href="/">ABOUT</Navbar.Brand>
-          <Button variant="primary">Cart: {0}</Button>
+          <Button variant="primary" onClick={props.showCartHandler}>Cart: {0}</Button>
         </Container>
       </Navbar>
 
@@ -68,7 +70,7 @@ const HBF = () => {
         <Container fluid className="d-flex justify-content-center bg-info text-white p-2">
           <Row>
             <Col className="text-start">
-              <h3>The Generics</h3>
+              <h1>The Generics</h1>
             </Col>
             <Col className='d-flex text-end'>
               <p className='p-3'>Youtube</p>
