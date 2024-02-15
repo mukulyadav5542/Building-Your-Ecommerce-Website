@@ -1,6 +1,6 @@
 // import React from "react";
 
-const cartElements = [
+export const cartElements = [
   {
     title: "Colors",
 
@@ -32,4 +32,3 @@ const cartElements = [
   },
 ];
 
-export default cartElements;
