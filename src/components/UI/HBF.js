@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Container, Button, Row, Col } from "react-bootstrap";
 // import Card from 'react-bootstrap/Card';
 import ProductsArr from "./ProductsArr";
 // import Cart from '../Cart/Cart';
+import CartContext from '../Store/CartContext';
 
 const HBF = (props) => {
+
+  const cartCtx = useContext(CartContext);
+
   return (
     <>
       <Navbar bg="dark" expand="sm" variant="dark">
@@ -12,7 +16,7 @@ const HBF = (props) => {
           <Navbar.Brand href="/">HOME</Navbar.Brand>
           <Navbar.Brand href="/">STORE</Navbar.Brand>
           <Navbar.Brand href="/">ABOUT</Navbar.Brand>
-          <Button variant="primary" onClick={props.showCartHandler}>Cart: {0}</Button>
+          <Button variant="primary" onClick={props.showCartHandler}>Cart: {cartCtx.cart.length}</Button>
         </Container>
       </Navbar>
 
@@ -54,7 +58,7 @@ const HBF = (props) => {
                   <p className="card-text text-start">
                     Price: Rs.{product.price}
                   </p>
-                  <button className="btn btn-primary">Add to cart</button>
+                  <button className="btn btn-primary" onClick={cartCtx.addItems.bind(null, product)}>Add to cart</button>
                 </div>
               </div>
             </div>
