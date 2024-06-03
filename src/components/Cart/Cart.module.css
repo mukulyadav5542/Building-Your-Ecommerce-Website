@@ -1,0 +1,6 @@
+.parent{
+    padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+}
