@@ -19,6 +19,8 @@ const Header = (props) => {
           <a href='/' className="m-2">HOME</a>
           <a href="/store" className="m-2">STORE</a>
           <a href="/about" className="m-2">ABOUT</a>
+          <a href="/contact-us" className="m-2">Contact Us</a>
+
           <Button variant="warning" onClick={props.showCartHandler} className="m-2">
             CART:{cartCtx.cart.length}
           </Button>
