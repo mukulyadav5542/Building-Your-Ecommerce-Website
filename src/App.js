@@ -10,6 +10,7 @@ import Footer from "./components/UI/Footer";
 import HomeContent from "./components/UI/HomeContent";
 import ContactUs from "./Pages/ContactUs";
 import ProductsPage from "./Pages/ProductsPage";
+import Login from "./Pages/Login";
 
 // import UserList from './components/UserList';
 // import Registration from './components/Registration';
@@ -44,6 +45,7 @@ function App() {
         <Route path="/store" element={<Store />}></Route>
         <Route path="/contact-us" element={<ContactUs />}></Route>
         <Route path="/products/:productId" element={<ProductsPage />}></Route>
+        <Route path="/login" element={<Login />}></Route>
       </Routes>
 
       {/* <div className="container p-4 text-center">
