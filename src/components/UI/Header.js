@@ -5,10 +5,14 @@ import { Nav, Button } from "react-bootstrap";
 // import Cart from '../Cart/Cart';
 import CartContext from "../Store/CartContext";
 // import { Link } from "react-router-dom";
+import AuthContext from "../Store/auth-context";
 
 const Header = (props) => {
 
   const cartCtx = useContext(CartContext);
+
+  const authCtx = useContext(AuthContext);
+  console.log({authCtx})
 
   return (
     <>
@@ -17,10 +21,9 @@ const Header = (props) => {
         activeKey="/home"
       >
           <a href='/' className="m-2">HOME</a>
-          <a href="/store" className="m-2">STORE</a>
           <a href="/about" className="m-2">ABOUT</a>
-          <a href="/login" className="m-2">LOGIN</a>
-          <a href="/contact-us" className="m-2">Contact Us</a>
+          {authCtx.isLoggedIn ? <a href="/store" className="m-2">STORE</a>:<a href="/login" className="m-2">LOGIN</a>}
+          <a href="/contact-us" className="m-2">CONTACT-US</a>
 
           <Button variant="warning" onClick={props.showCartHandler} className="m-2">
             CART:{cartCtx.cart.length}

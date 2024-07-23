@@ -3,10 +3,16 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import CartContext from "../Store/CartContext";
 
 import ProductsArr from "./ProductsArr";
+import { useNavigate } from "react-router-dom";
 
 const Store = () => {
 
   const cartCtx = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleRoute = (id) => {
+    navigate(`/products/${id}`);
+  }
 
   return (
     <>
@@ -23,7 +29,7 @@ const Store = () => {
       <div className="container">
         <div className="row justify-content-center">
           {ProductsArr.map((product, index) => (
-            <div key={index} className="col-md-6 col-lg-4 mb-4">
+            <div key={index} style={{cursor: "pointer"}} className="col-md-6 col-lg-4 mb-4 " onClick={()=>handleRoute(product.productId)}>
               <div className="card" style={{ width: "100%" }}>
                 <h5 className="card-title text-center">{product.title}</h5>
                 <img

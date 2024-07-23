@@ -1,36 +1,52 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import ProductsArr from "../components/UI/ProductsArr";
-import Header from "../components/UI/Header";
+import ReactImageMagnify from 'react-image-magnify';
+import './ProductsPage.module.css'
+// import Header from "../components/UI/Header";
 
 const ProductsPage = () => {
   const params = useParams();
   // it will return a object
-  console.log(params.productId);
+  console.log(params.productId,{params});
 
   const pDetails = ProductsArr.filter((ele) => {
-    return ele.id === params.productId;
-  });
+    return ele.productId === params.productId;
+  }) || [];
 
-  console.log(pDetails, "this is in product details single product");
-  console.log(pDetails[0].title);
 
   return (
     <>
-      <div className="flex bg-black h-10  text-[20px] text-white">
+      {/* <div className="flex bg-black h-10  text-[20px] text-white">
         <Header />
-      </div>
-      <div className="flex  w-[18.90rem] m-auto mt-[1rem] flex-col">
-        <div>
-          <img
+      </div> */}
+
+      <div className="App" width={400}>
+        {/* <div id="#imageMagnifyer"> */}
+          {/* <img
             className="hover:scale-110 transition duration-500 cursor-pointer object-cover"
-            src={pDetails[0].imageUrl}
+            src={pDetails[0]?.imageUrl}
             alt=""
-          />
-        </div>
+          /> */}
+          <ReactImageMagnify {...{
+            smallImage: {
+                alt: 'Wristwatch by Ted Baker London',
+                // isFluidWidth: true,
+                src: pDetails[0]?.imageUrl,
+                width:400,
+                height:400,
+            },
+            largeImage: {
+                src: pDetails[0]?.imageUrl,
+                width: 1000,
+                height: 800
+            },
+            isHintEnabled: true,
+        }} />
+        {/* </div> */}
         <div className="flex justify-between">
-          <div>{pDetails[0].title}</div>
-          <div>{pDetails[0].price}</div>
+          <div>{pDetails[0]?.title}</div>
+          <div>{pDetails[0]?.price}</div>
         </div>
       </div>
       <div className="border text-center mt-[5rem] font-serif  text-[35px]">
