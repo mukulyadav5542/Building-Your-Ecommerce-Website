@@ -11,12 +11,13 @@ export const AuthContextProvider = (props) => {
   const initialToken = localStorage.getItem("token");
 
   const [token, setToken] = useState(initialToken);
+  console.log({token})
 
   const userIsLoggedIn = !!token;
 
-  const loginHandler = () => {
-    setToken(token);
-    localStorage.setItem("token");
+  const loginHandler = (data) => {
+    setToken(data);
+    localStorage.setItem("token",data);
   };
 
   const logoutHandler = () => {

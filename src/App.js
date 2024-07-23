@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./App.css";
 import Header from "./components/UI/Header";
 import Cart from "./components/Cart/Cart";
@@ -11,6 +11,7 @@ import HomeContent from "./components/UI/HomeContent";
 import ContactUs from "./Pages/ContactUs";
 import ProductsPage from "./Pages/ProductsPage";
 import Login from "./Pages/Login";
+import AuthContext from "./components/Store/auth-context";
 
 // import UserList from './components/UserList';
 // import Registration from './components/Registration';
@@ -24,6 +25,12 @@ function App() {
   //   { path: "/contact-us", element: <ContactUs />},
   // ]);
 
+  const authCtx = useContext(AuthContext);
+
+  // const navigate = useNavigate();
+
+  // const reDirect = authCtx.isLoggedIn;
+
   const [show, setShow] = useState(false);
 
   const showCartHandler = () => {
@@ -34,6 +41,14 @@ function App() {
     setShow(false);
   };
 
+  // useEffect(() => {
+  //   if (authCtx.isLoggedIn) {
+  //     navigate("/store");
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // }, [reDirect]);
+
   return (
     <>
       <Header showCartHandler={showCartHandler} />
@@ -41,9 +56,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
 
-        <Route path="/about" element={<About />}></Route>
+        {!authCtx.isLoggedIn && (
+          <Route path="/about" element={<About />}></Route>
+        )}
         <Route path="/store" element={<Store />}></Route>
-        <Route path="/contact-us" element={<ContactUs />}></Route>
+          <Route path="/contact-us" element={<ContactUs />}></Route>
         <Route path="/products/:productId" element={<ProductsPage />}></Route>
         <Route path="/login" element={<Login />}></Route>
       </Routes>

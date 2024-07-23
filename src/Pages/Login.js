@@ -1,10 +1,12 @@
 import React, { useState, useRef, useContext } from "react";
 import classes from "./Login.module.css";
 import AuthContext from "../components/Store/auth-context";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const navigate = useNavigate()
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,10 +27,10 @@ const Login = () => {
     let url;
     if (isLogin) {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAiOs1iUhJxoG_bOV3-8v55Femyrqc5YpI";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBKKNnWGKV0A3yOJUzuzxeISHWv83-sU1w";
     } else {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAiOs1iUhJxoG_bOV3-8v55Femyrqc5YpI";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBKKNnWGKV0A3yOJUzuzxeISHWv83-sU1w";
     }
     fetch(url, {
       method: "POST",
@@ -48,13 +50,13 @@ const Login = () => {
         } else {
           return res.json().then((data) => {
             let errorMessage = "Login Failed";
-
             throw new Error(errorMessage);
           });
         }
       })
       .then((data) => {
         authCtx.login(data.idToken);
+        navigate('/store')
       })
       .catch((err) => {
         alert(err.message);
@@ -62,23 +64,23 @@ const Login = () => {
   };
 
   return (
-    <section>
+    <section className={classes.login}>
       <h1>{isLogin ? "Login" : ""}</h1>
       <form onSubmit={submitHandler}>
-        <div>
+        <div className={classes.control}>
           <label htmlFor="email">Your Email</label>
-          <input type="email" id="email" required />
+          <input type="email" id="email" required ref={emailInputRef} />
         </div>
-        <div>
+        <div className={classes.control}>
           <label htmlFor="password">Your Password</label>
-          <input type="password" id="password" required />
+          <input type="password" id="password" required ref={passwordInputRef} />
         </div>
-        <div>
+        <div className={classes.actions}>
           {!isLoading && (
             <button>{isLogin ? "Login" : "Create Account"}</button>
           )}
           {isLoading && <p>Sending request......</p>}
-          <button onClick={switchLoginModeHandler}>
+          <button type="button" onClick={switchLoginModeHandler} className={classes.toggle}>
             {isLogin ? "Create Account" : "Login with Existing Account"}
           </button>
         </div>
